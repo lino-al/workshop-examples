@@ -1,0 +1,15 @@
+---
+- name: Ensure users
+  hosts: node1
+  become: yes
+
+  tasks:
+    - name: Ensure three users are present
+      user:
+        name: "{{ item.username }}"
+        state: present
+        groups: "{{ item.groups }}"
+      loop:
+        - { username: 'ops1', groups: 'dbadmin' }
+        - { username: 'ops2', groups: 'dbadmin' }
+        - { username: 'ops3', groups: 'webadmin' }
